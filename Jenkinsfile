@@ -72,19 +72,19 @@ pipeline {
                     if(artifactExists) {
                         echo "*** File: ${artifactPath}, group: ${pom.groupId}, packaging: ${pom.packaging}, version ${pom.version}";
                         nexusArtifactUploader(
-                            nexusVersion: NEXUS_VERSION,
-                            protocol: NEXUS_PROTOCOL,
-                            nexusUrl: NEXUS_URL,
-                            groupId: pom.groupId,
-                            version: pom.version,
-                            repository: NEXUS_REPOSITORY,
-                            credentialsId: NEXUS_CREDENTIAL_ID,
+                            nexusVersion: 'nexus3',
+                            protocol: 'http',
+                            nexusUrl: '54.234.197.163:8081',
+                            groupId: 'pom.org.springframework.boot',
+                            version: 'pom.2.4.5',
+                            repository: 'maven-repository',
+                            credentialsId: 'NEXUS_CRED',
                             artifacts: [
-                                [artifactId: pom.artifactId,
+                                [artifactId: 'pom.spring-boot-starter-parent',
                                 classifier: '',
                                 file: artifactPath,
                                 type: pom.packaging],
-                                [artifactId: pom.artifactId,
+                                [artifactId: 'pom.spring-boot-starter-parent',
                                 classifier: '',
                                 file: "pom.xml",
                                 type: "pom"]
