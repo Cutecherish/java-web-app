@@ -55,15 +55,15 @@ pipeline {
                             protocol: 'http',
                             nexusUrl: '54.234.197.163:8081',
                             groupId: 'pom.org.springframework.boot',
-                            version: 'pom.2.4.5',
+                            version: 'pom.0.0.1-SNAPSHOT',
                             repository: 'maven-repository',
                             credentialsId: 'NEXUS_CRED',
                             artifacts: [
-                                [artifactId: 'pom.spring-boot-starter-parent',
+                                [artifactId: 'pom.demo',
                                 classifier: '',
                                 file: artifactPath,
                                 type: pom.packaging],
-                                [artifactId: 'pom.spring-boot-starter-parent',
+                                [artifactId: 'pom.demo',
                                 classifier: '',
                                 file: "pom.xml",
                                 type: "pom"]
