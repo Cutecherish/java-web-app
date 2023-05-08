@@ -55,19 +55,7 @@ pipeline {
     //         }
     //    }
     // }
-    stage('Upload to Nexus') {
-    steps {
-        script {
-            withMaven(
-                maven: 'Maven 4.0.0',
-                mavenLocalRepo: 'maven-repository',
-                mavenOpts: '-Xmx1024m -XX:MaxPermSize=512m'
-            ) {
-                sh 'mvn deploy:deploy-file -DgroupId=pom.org.springframework.boot -DartifactId=pom.demo -Dversion=pom.0.0.1-SNAPSHOT -Dpackaging=jar -Dfile=sample.jar -DrepositoryId=maven-repository -Durl=54.234.197.163:8081'
-            }
-        }
-    }
-}
+
     stage('Login') {
       steps {
         sh 'echo $HEROKU_API_KEY | docker login --username=_ --password-stdin registry.heroku.com'
@@ -88,6 +76,19 @@ pipeline {
         '''
       }
     }
+    stage('Upload to Nexus') {
+    steps {
+        script {
+            withMaven(
+                maven: 'Maven 4.0.0',
+                mavenLocalRepo: 'maven-repository',
+                mavenOpts: '-Xmx1024m -XX:MaxPermSize=512m'
+            ) {
+                sh 'mvn deploy:deploy-file -DgroupId=pom.org.springframework.boot -DartifactId=pom.demo -Dversion=pom.0.0.1-SNAPSHOT -Dpackaging=jar -Dfile=sample.jar -DrepositoryId=maven-repository -Durl=54.234.197.163:8081'
+            }
+        }
+    }
+}
   }
   post {
     always {
